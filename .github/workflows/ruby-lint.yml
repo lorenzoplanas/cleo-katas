@@ -27,8 +27,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
+      uses: ruby/setup-ruby@v1
+      with:
           ruby-version: 3.4.1
     - name: Run cops
       run: bundle exec rubocop
