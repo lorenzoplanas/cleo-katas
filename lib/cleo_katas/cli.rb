@@ -22,18 +22,17 @@ module CleoKatas
 
       say "Creating kata #{kata_number_name}"
 
-      empty_directory(File.join(Dir.pwd, 'katas', "#{kata_number_name}"))
-      empty_directory(File.join(Dir.pwd, 'katas', "#{kata_number_name}", 'source'))
+      empty_directory(File.join(Dir.pwd, 'katas', kata_number_name.to_s))
+      empty_directory(File.join(Dir.pwd, 'katas', kata_number_name.to_s, 'source'))
       template('README.md.erb',
-               File.join(Dir.pwd, 'katas', "#{kata_number_name}", 'README.md')
-      )
+               File.join(Dir.pwd, 'katas', kata_number_name.to_s, 'README.md'))
       template(
         'main.rb.erb',
-                File.join(Dir.pwd, 'katas', "#{kata_number_name}", 'source', 'main.rb')
+        File.join(Dir.pwd, 'katas', kata_number_name.to_s, 'source', 'main.rb')
       )
       template(
         'test.rb.erb',
-               File.join(Dir.pwd, 'katas', "#{kata_number_name}", 'source', 'test.rb')
+        File.join(Dir.pwd, 'katas', kata_number_name.to_s, 'source', 'test.rb')
       )
     end
 
@@ -52,7 +51,7 @@ module CleoKatas
 
       begin
         kata_file.numbered_name
-      rescue
+      rescue StandardError
         say "Kata #{kata_name} not found"
         return
       end
@@ -61,7 +60,7 @@ module CleoKatas
       target_directory = File.join(Dir.pwd, 'katas', kata_file.numbered_name, username)
       readme_target_file = File.join(target_directory, 'README.md')
 
-      directory(source_directory,target_directory)
+      directory(source_directory, target_directory)
       copy_file(kata_file.path, readme_target_file)
       append_file(readme_target_file, <<~MARKDOWN)
 
@@ -80,7 +79,6 @@ module CleoKatas
     # rubocop:enable Metrics/MethodLength
 
     protected
-
 
     def kata_class_name
       kata.to_s.split(/[^a-z0-9]+/i).map(&:capitalize).join
