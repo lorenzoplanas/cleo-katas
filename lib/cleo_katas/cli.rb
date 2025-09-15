@@ -13,6 +13,8 @@ module CleoKatas
     source_root File.expand_path('templates', __dir__)
 
     desc 'create', 'Create a new kata'
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     def create(kata_name)
       self.kata = kata_name
 
@@ -35,6 +37,8 @@ module CleoKatas
         File.join(Dir.pwd, 'katas', kata_number_name.to_s, 'source', 'test.rb')
       )
     end
+    # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
 
     desc 'list', 'List all available katas'
     def list
@@ -43,9 +47,9 @@ module CleoKatas
         say "#{kata_file.number}: #{kata_file.name}"
       end
     end
-
-    # rubocop:disable Metrics/MethodLength
     desc 'attempt DIRECTORY', 'Create a new kata attempt in your own directory'
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     def attempt(kata_name)
       self.kata = kata_name
 
@@ -77,6 +81,7 @@ module CleoKatas
       say "Created new kata attempt directory at #{target_directory} with a main.rb file"
     end
     # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
 
     protected
 
